@@ -1,0 +1,48 @@
+<legend>Products</legend>
+
+<%= form_tag import_products_path, multipart: true, remote: true, class: 'form-inline' do %>
+  <div class="form-group">
+    <%= file_field_tag :file, class: '' %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Import CSV", class: 'btn btn-info' %>
+  </div>
+<% end %>
+
+<br/>
+
+<table class='table table-bordered table-condensed table-striped table-hover'>
+  <thead>
+    <tr>
+      <th>SKU</th>
+      <th>Supplier</th>
+      <th>Name</th>
+      <th>Add. Field 1</th>
+      <th>Add. Field 2</th>
+      <th>Add. Field 3</th>
+      <th>Add. Field 4</th>
+      <th>Add. Field 5</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.sku %></td>
+        <td><%= product.supplier&.name %></td>
+        <td><%= product.name %></td>
+        <td><%= product.additional_field_1 %></td>
+        <td><%= product.additional_field_2 %></td>
+        <td><%= product.additional_field_3 %></td>
+        <td><%= product.additional_field_4 %></td>
+        <td><%= product.additional_field_5 %></td>
+        <td><%= product.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @products %>
+
+<br>
